@@ -1,2 +1,2 @@
 # magnolia
-### backend for lilypedia. development has not started yet.
+### backend for lilypedia. In very early development.
