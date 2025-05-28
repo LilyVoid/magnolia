@@ -3,25 +3,42 @@ use axum::{
     http::StatusCode,
     Json, Router,
 };
-//use serde::{Deserialize, Serialize};
+use serde::{Deserialize, Serialize};
 
 pub const VERSION: &str = env!("CARGO_PKG_VERSION");
 
-
-async fn health() -> &'static str {
-    "OK"
+#[derive(Serialize)]
+struct Info {
+    version: String,
 }
 
-async fn version() -> &'static str {
-    VERSION
+#[derive(Deserialize)]
+struct Page {
+    title: String,
+    body: String
 }
+
+// return version
+async fn info() -> Json<Info> {
+    Json(Info{ version: VERSION.to_string() })
+}
+
+// temporary test draft fn
+async fn draft(Json(Page { title, body }): Json<Page>) -> StatusCode {
+    log::info!("Received draft: title = {}, body = {}", title, body);
+    StatusCode::OK
+}
+
 
 #[tokio::main]
 async fn main() {
-    env_logger::init();
+    env_logger::Builder::from_default_env()
+    .filter_level(log::LevelFilter::Info)
+    .init();
     log::info!("magnolia starting on 0.0.0.0:3000");
 
-    let app: Router = Router::new().route("/version", get(version)).route("/health", axum::routing::get(health));
+    let app = Router::new().route("/info", get(info)).route("/draft", post(draft));
     let listener = tokio::net::TcpListener::bind("0.0.0.0:3000").await.unwrap();
     axum::serve(listener, app).await.unwrap();
 }
+
