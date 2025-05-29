@@ -2,6 +2,19 @@
 
 Backend for lilypedia. In very early development.
 
+### Prerequisites
+
+1. rust:
+
+   ```sh
+   curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
+   ```
+2. sqlx-cli:
+
+   ```sh
+   cargo install sqlx-cli --no-default-features --features rustls,postgres
+   ```
+
 ## Setup
 
 1. Clone the repo:
@@ -28,7 +41,7 @@ Backend for lilypedia. In very early development.
 4. Run migrations:
 
    ```sh
-   cargo sqlx migrate run
+   sqlx migrate run
    ```
 
 5. Run the server:
