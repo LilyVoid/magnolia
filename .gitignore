@@ -1,1 +1,27 @@
+# Rust
 /target
+**/*.rs.bk
+Cargo.lock
+
+# dotenv
+.env
+
+# Logs
+*.log
+
+# SQLx
+# sqlx-data.json
+
+# Docker
+/docker-data
+*.pid
+*.sock
+
+# VSCode / JetBrains
+.vscode/
+.idea/
+*.sw?
+
+# OS files
+.DS_Store
+Thumbs.db
