@@ -1,0 +1,16 @@
+[package]
+name = "magnolia"
+version = "0.3.0"
+edition = "2024"
+
+[dependencies]
+tokio = {version = "1.45.1", features = ["full"]}
+serde = { version = "1.0.219", features = ["derive"] }
+serde_json = "1.0.140"
+axum = "0.8.4"
+log = "0.4.27"
+env_logger = "0.11.8"
+markdown = "1.0.0"
+sqlx = { version = "0.8", features = [ "runtime-tokio", "tls-native-tls", "postgres" ] }
+dotenvy = "0.15.7"
+tower-http = {version = "0.6.8", features = ["cors"] }
